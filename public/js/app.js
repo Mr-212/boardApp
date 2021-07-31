@@ -2676,22 +2676,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 Vue.use(VModal);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  created: function created() {
-    // this.$vueEventBus.$on('board-updated', this.getBoards());
-    this.$root.$on('board-updated', function () {
-      // try{
-      //             console.log('Component mounted.')
-      //             const response = await axios.get(base_url+'/board');
-      //             if(response.data.STATUS_CODE =='OK'){
-      //                 this.boards = response.data.data;
-      //             }
-      //     }
-      //     catch(error){
-      //         console.log(error);
-      //     }
-      //   self.eventListion();
-      this.getBoards();
-    });
+  created: function created() {// this.$vueEventBus.$on('board-updated', this.getBoards());
+    //  this.$root.$on('board-updated', function(){
+    //     //   this.renderComponent = true;
+    //     console.log('updated');
+    //       this.$forceUpdate(); 
+    //     // try{
+    //     //             console.log('Component mounted.')
+    //     //             const response = await axios.get(base_url+'/board');
+    //     //             if(response.data.STATUS_CODE =='OK'){
+    //     //                 this.boards = response.data.data;
+    //     //             }
+    //     //     }
+    //     //     catch(error){
+    //     //         console.log(error);
+    //     //     }
+    //     //   self.eventListion();
+    //        this.getBoards();
+    //  });
   },
   beforeDestroy: function beforeDestroy() {
     this.$root.$off('board-updated');
@@ -2771,6 +2773,7 @@ Vue.use(VModal);
       }))();
     },
     eventListion: function eventListion() {
+      this.$forceUpdate();
       console.log('in event');
       this.getBoards();
     }
@@ -3335,25 +3338,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.data.STATUS_CODE == 'OK') {
                   _this.message = response.data.message;
-                }
 
-                _this.$root.$emit('board-updated'); //console.log(response.data);
+                  _this.$root.$emit('board-updated');
+
+                  _this.$emit('board-updated');
+                } //console.log(response.data);
 
 
-                _context.next = 12;
+                _context.next = 11;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 12:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   }
@@ -39668,6 +39673,8 @@ var render = function() {
     { staticClass: "row" },
     [
       _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { on: { "board-updated": _vm.eventListion } }),
+        _vm._v(" "),
         _c(
           "button",
           {
@@ -39682,8 +39689,8 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _vm._l(_vm.boards, function(board) {
-        return _c("div", { key: board.id, staticClass: "col-md-3 mt-3" }, [
+      _vm._l(_vm.boards, function(board, index) {
+        return _c("div", { key: index, staticClass: "col-md-3 mt-3" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v(

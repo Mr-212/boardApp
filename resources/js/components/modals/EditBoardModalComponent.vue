@@ -70,10 +70,12 @@
                     const response = await axios.put(base_url+'/board/'+this.board.id,this.board);
                     if(response.data.STATUS_CODE == 'OK'){
                         this.message = response.data.message;
+                        this.$root.$emit('board-updated');
+                        this.$emit('board-updated');
                         
                     }
                     
-                    this.$root.$emit('board-updated');
+                    
                     //console.log(response.data);
                    
 
