@@ -99,6 +99,7 @@
                 this.$modal.show(EditBoardModal, {
                     id: id,
                     title:title,
+                    root: this.$root
                 },
               
                 {
