@@ -42,7 +42,7 @@
                     const response = await axios.post(base_url+'/board',this.board);
                     if(response.data.STATUS_CODE == 'OK'){
                         this.message = response.data.message;
-                        this.$root.$emit('board-updated');
+                        this.$emit('board-updated');
                         
                     }
                     if(response.data.STATUS_CODE == "VALIDATION_ERROR"){

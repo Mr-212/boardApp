@@ -2718,7 +2718,10 @@ Vue.use(VModal);
     showEditBoardModal: function showEditBoardModal(id, title) {
       this.$modal.show(_modals_EditBoardModalComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default, {
         id: id,
-        title: title
+        title: title,
+        root: this.$root
+      }, {
+        'board-updated': this.getBoards()
       }, {
         height: 'auto'
       });
@@ -2727,11 +2730,15 @@ Vue.use(VModal);
       this.$modal.show(_modals_RemoveBoardModalComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default, {
         id: id
       }, {
+        'board-updated': this.getBoards()
+      }, {
         height: 'auto'
       });
     },
     addBoardModal: function addBoardModal() {
       this.$modal.show(_modals_AddBoardModalComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default, {
+        'board-updated': this.getBoards()
+      }, {
         height: 'auto'
       });
     },
@@ -2851,8 +2858,7 @@ Vue.use(VModal);
     // console.log(this.board_id,this.card.board_id);
     this.getCards();
   },
-  beforeDestroy: function beforeDestroy() {
-    this.$root.$off('card-updated');
+  beforeDestroy: function beforeDestroy() {// this.$root.$off('card-updated')
   },
   components: {},
   data: function data() {
@@ -2885,6 +2891,8 @@ Vue.use(VModal);
       this.$modal.show(_modals_AddCardModalComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default, {
         board_id: this.board_id
       }, {
+        'card-updated': this.getCards()
+      }, {
         height: 'auto'
       });
     },
@@ -2892,12 +2900,16 @@ Vue.use(VModal);
       this.$modal.show(_modals_RemoveCardModalComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default, {
         id: id
       }, {
+        'card-updated': this.getCards()
+      }, {
         height: 'auto'
       });
     },
     editCard: function editCard(card) {
       this.$modal.show(_modals_AddCardModalComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default, {
         get_card: card
+      }, {
+        'card-updated': this.getCards()
       }, {
         height: 'auto'
       });
@@ -2912,31 +2924,30 @@ Vue.use(VModal);
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                console.log('Card Component get.');
-                _context.next = 4;
+                _context.next = 3;
                 return axios.get(base_url + '/board/' + _this.board_id + '/card');
 
-              case 4:
+              case 3:
                 response = _context.sent;
 
                 if (response.data.STATUS_CODE == 'OK') {
                   _this.cards = response.data.data;
                 }
 
-                _context.next = 11;
+                _context.next = 10;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 console.log(_context.t0);
 
-              case 11:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 7]]);
       }))();
     }
   }
@@ -3052,7 +3063,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (response.data.STATUS_CODE == 'OK') {
                   _this.message = response.data.message;
 
-                  _this.$root.$emit('board-updated');
+                  _this.$emit('board-updated');
                 }
 
                 if (response.data.STATUS_CODE == "VALIDATION_ERROR") {
@@ -3218,7 +3229,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.message = response.data.message;
                 }
 
-                _this2.$root.$emit('card-updated'); //console.log(response.data);
+                _this2.$emit('card-updated'); //console.log(response.data);
 
 
                 _context2.next = 12;
@@ -3337,9 +3348,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
 
                 if (response.data.STATUS_CODE == 'OK') {
-                  _this.message = response.data.message;
-
-                  _this.$root.$emit('board-updated');
+                  _this.message = response.data.message; // this.$root.$emit('board-updated');
 
                   _this.$emit('board-updated');
                 } //console.log(response.data);
@@ -3460,7 +3469,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (response.data.STATUS_CODE == 'OK') {
                   _this.message = response.data.message;
 
-                  _this.$root.$emit('board-updated');
+                  _this.$emit('board-updated');
                 } //console.log(response.data);
 
 
@@ -3558,7 +3567,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (response.data.STATUS_CODE == 'OK') {
                   _this.message = response.data.message;
 
-                  _this.$root.$emit('card-updated');
+                  _this.$emit('card-updated');
                 }
 
                 _context.next = 10;

@@ -48,7 +48,7 @@
                     const response = await axios.delete(base_url+'/card/'+this.id,);
                     if(response.data.STATUS_CODE == 'OK'){
                         this.message = response.data.message;
-                        this.$root.$emit('card-updated');
+                        this.$emit('card-updated');
                     }
 
                 }catch(error){

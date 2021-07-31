@@ -101,6 +101,9 @@
                     title:title,
                     root: this.$root
                 },
+                {
+                    'board-updated':this.getBoards(),
+                },
               
                 {
                 height: 'auto'
@@ -113,6 +116,9 @@
                     {
                         id: id,
                     },
+                     {
+                    'board-updated':this.getBoards(),
+                    },
                 
                     {
                     height: 'auto'
@@ -123,6 +129,9 @@
 
             addBoardModal(){
                 this.$modal.show(AddBoardModal, 
+                     {
+                    'board-updated':this.getBoards(),
+                    },
                     {
                         height: 'auto'
                     }

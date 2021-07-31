@@ -51,7 +51,7 @@
         
         },
         beforeDestroy() {
-            this.$root.$off('card-updated')
+            // this.$root.$off('card-updated')
         },
         components: { 
         },
@@ -98,6 +98,11 @@
                     {
                         board_id:this.board_id
                     },
+
+                    {
+                    'card-updated':this.getCards(),
+                    },
+
                     {
                         height: 'auto'
                     }
@@ -108,6 +113,10 @@
                 this.$modal.show(RemoveCardModal, 
                     {
                         id: id,
+                    },
+
+                    {
+                    'card-updated':this.getCards(),
                     },
                 
                     {
@@ -120,6 +129,9 @@
                 this.$modal.show(AddCardModal, {
                     get_card:card,
                     },
+                    {
+                    'card-updated':this.getCards(),
+                    },
               
                     {
                     height: 'auto'
@@ -129,7 +141,7 @@
 
             async getCards(){
                     try{
-                            console.log('Card Component get.')
+                            // console.log('Card Component get.')
                             const response = await axios.get(base_url+'/board/'+this.board_id+'/card');
                             if(response.data.STATUS_CODE =='OK'){
                                 this.cards = response.data.data;

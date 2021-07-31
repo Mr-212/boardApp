@@ -85,7 +85,7 @@
                         
                     }
                     
-                    this.$root.$emit('card-updated');
+                    this.$emit('card-updated');
                     //console.log(response.data);
                    
 
